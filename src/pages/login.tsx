@@ -1,4 +1,5 @@
 import React from 'react';
+import { SquarePlus } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -11,6 +12,9 @@ function Login() {
             <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
                 <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <form className="space-y-6" action="#">
+
+                            <SquarePlus size={32} color="#4a8cb5" className=''/>
+
                         <h5 className="text-xl font-medium text-gray-900 dark:text-white">Entrar na plataforma</h5>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu e-mail</label>

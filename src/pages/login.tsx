@@ -11,14 +11,16 @@ function Login() {
         <>
             <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
                 <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    <form className="space-y-6" action="#">
+                    <form className="space-y-4" action="#">
+                        <div className="flex justify-center">
+                            <SquarePlus size={22} color="#1f92ef" className=''/>
+                        </div>
+                        <h5 className="text-xl font-bold text-white dark:text-white text-center">App de Altas Médicas</h5>
+                        <h5 className="text-xs font-medium text-gray-400 dark:text-gray text-center">Sistema de Gestão Hospitalar</h5>
 
-                            <SquarePlus size={32} color="#4a8cb5" className=''/>
-
-                        <h5 className="text-xl font-medium text-gray-900 dark:text-white">Entrar na plataforma</h5>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu e-mail</label>
-                            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nome@empresa.com" required />
+                            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nome@gmail.com" required />
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua senha</label>
@@ -31,27 +33,14 @@ function Login() {
                                 </div>
                                 <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lembrar-me</label>
                             </div>
-                            <a
-                                href="#"
-                                className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    setIsModalOpen(true);
-                                }}
-                            >
-                                Esqueceu a senha?
-                            </a>
+                            <a href="#" className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500" onClick={e => {e.preventDefault(); setIsModalOpen(true);}}>Esqueceu a senha?</a>
                         </div>
-                        <button
-                            type="submit"
-                            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            onClick={e => {
-                                e.preventDefault();
-                                Alterarpagina('/home');
-                            }}
-                        >
-                            Entrar na sua conta
-                        </button>
+                       <button
+  type="submit"
+  className="w-full text-white bg-[#0e66af] hover:bg-[#0c5998] focus:ring-4 focus:outline-none focus:ring-[#0c5998] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+  onClick={e => { e.preventDefault(); Alterarpagina('/home'); }}>
+  Entrar na sua conta
+</button>
                     </form>
                 </div>
             </div>
@@ -105,17 +94,11 @@ function Login() {
                                 <button
                                     type="button"
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    Alterar
-                                </button>
+                                    onClick={() => setIsModalOpen(false)}>Alterar </button>
                                 <button
                                     type="button"
                                     className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    Cancelar
-                                </button>
+                                    onClick={() => setIsModalOpen(false)}>Cancelar</button>
                             </div>
                         </div>
                     </div>

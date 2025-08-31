@@ -38,7 +38,7 @@ function Login() {
                        <button
   type="submit"
   className="w-full text-white bg-[#0e66af] hover:bg-[#0c5998] focus:ring-4 focus:outline-none focus:ring-[#0c5998] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-  onClick={e => { e.preventDefault(); Alterarpagina('/home'); }}>
+  onClick={e => { e.preventDefault(); Alterarpagina('/dashboard'); }}>
   Entrar na sua conta
 </button>
                     </form>

@@ -36,9 +36,9 @@ const cardPanel = ({}: {}) => {
           <div className="grid grid-cols-2 gap-4 w-full">
 
             <BtnAcoes texto="Novo Paciente" icone={<UserPlus size={20} color="#0099ff" />} fundoBG="bg-blue-50"/>
-            <BtnAcoes texto="Agendar Consulta" icone={<CalendarPlus size={20} color="#0099ff" />} fundoBG="bg-green-50"/>
-            <BtnAcoes texto="Nova Anamnese" icone={<NotepadText size={20} color="#0099ff" />} fundoBG="bg-yellow-50"/>
-            <BtnAcoes texto="Novo Prontuário" icone={<ClipboardPlus size={20} color="#0099ff" />} fundoBG="bg-purple-50"/>
+            <BtnAcoes texto="Impressões" icone={<CalendarPlus size={20} color="#0099ff" />} fundoBG="bg-green-50"/>
+            <BtnAcoes texto="Novo PTS" icone={<NotepadText size={20} color="#0099ff" />} fundoBG="bg-yellow-50"/>
+            <BtnAcoes texto="Novo PTA" icone={<ClipboardPlus size={20} color="#0099ff" />} fundoBG="bg-purple-50"/>
 
           </div>
         </div>

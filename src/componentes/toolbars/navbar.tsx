@@ -22,12 +22,12 @@ export default function Navbar() {
       <button
       className="p-1 rounded-xl hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300"
     >
-      <Bell color="white"  className="w-8 h-8 text-blue-700" />
+      <Bell color="white"  className="w-6 h-6 text-blue-700" />
     </button>
 
             <button className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
               
-              <CircleUser color="white"   className="w-8 h-8 text-blue-700" />
+              <CircleUser color="white" className="w-6 h-6 text-blue-700" />
 
             </button>
 

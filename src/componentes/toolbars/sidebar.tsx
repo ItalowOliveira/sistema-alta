@@ -32,7 +32,7 @@ export default function Sidebar() {
           <li>
             <Link to="/pta" className="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
               <Bandage size={20} color="#999999" />
-             <span className="ms-3 text-xs font-bold text-[#999999]">Planos Terapêutico</span>
+             <span className="ms-3 text-xs font-bold text-[#999999]">PTA</span>
             </Link>
           </li>
 

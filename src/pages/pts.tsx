@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PtsModal from "../componentes/modal/ptsModal"; // cuidado: nomes de componentes sempre com Maiúscula
+import PtsModal from "../componentes/modal/ptsModal";
 
 export default function ModalPtsTemplate() {
   const [isOpen, setIsOpen] = useState(false);

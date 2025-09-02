@@ -1,9 +1,10 @@
 
-const btnAcoes = ({texto, icone, fundoBG}: {texto: string; icone: React.ReactNode; fundoBG: string}) => {
+const btnAcoes = ({texto, icone, fundoBG, onClick}: {texto: string; icone: React.ReactNode; fundoBG: string; onClick: string}) => {
   return (
 
 
       <button
+      onClick={}
         className={`flex flex-col ${fundoBG} items-center justify-center p-4 
                     bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 
                     dark:border-neutral-700 shadow-sm transition 

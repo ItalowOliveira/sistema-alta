@@ -1,9 +1,16 @@
 import { UserPlus, CalendarPlus, NotepadText, ClipboardPlus} from "lucide-react";
+import { useState } from "react";
+import PtsModal from "../componentes/modal/ptsModal";
 import BtnAcoes from "../buttons/btnAcoes";
 import BtnList from "../buttons/btnLista";
 
+type PtsModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
-const cardPanel = ({}: {}) => {
+export default function cardPanel() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
 
 
@@ -49,5 +56,3 @@ const cardPanel = ({}: {}) => {
 
   );
 }
-
-export default cardPanel;

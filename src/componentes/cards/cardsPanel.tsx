@@ -1,16 +1,10 @@
 import { UserPlus, CalendarPlus, NotepadText, ClipboardPlus} from "lucide-react";
 import { useState } from "react";
-import PtsModal from "../componentes/modal/ptsModal";
 import BtnAcoes from "../buttons/btnAcoes";
 import BtnList from "../buttons/btnLista";
 
-type PtsModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
 export default function cardPanel() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [] = useState(false);
   return (
 
 
@@ -42,7 +36,7 @@ export default function cardPanel() {
         <div className="p-7 md:p-12 w-full">
           <div className="grid grid-cols-2 gap-4 w-full">
 
-            <BtnAcoes texto="Novo Paciente" icone={<UserPlus size={20} color="#0099ff" />} fundoBG="bg-blue-50"/>
+            <BtnAcoes  texto="Novo Paciente" icone={<UserPlus size={20} color="#0099ff" />} fundoBG="bg-blue-50"/>
             <BtnAcoes texto="Impressões" icone={<CalendarPlus size={20} color="#0099ff" />} fundoBG="bg-green-50"/>
             <BtnAcoes texto="Novo PTS" icone={<NotepadText size={20} color="#0099ff" />} fundoBG="bg-yellow-50"/>
             <BtnAcoes texto="Novo PTA" icone={<ClipboardPlus size={20} color="#0099ff" />} fundoBG="bg-purple-50"/>

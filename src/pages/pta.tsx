@@ -1,5 +1,6 @@
 import { useState } from "react";
-import PtsModal from "../componentes/modal/ptaModal"; 
+import PtsEspec from "../componentes/modal/especModal"
+import PtsModal from "../componentes/modal/ptaModal"
 
 export default function ModalPtaTemplate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function ModalPtaTemplate() {
         Cadastrar PTA
       </button>
 
+      <PtsEspec isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <PtsModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );

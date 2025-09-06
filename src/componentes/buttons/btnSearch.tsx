@@ -9,7 +9,7 @@ export default function btnSearch(){
     <label className="sr-only">Search</label>
     <div className="relative w-full">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <UserRoundSearch color="gray"/>
+          <UserRoundSearch color="white"/>
         </div>
         <input 
             type="text" 

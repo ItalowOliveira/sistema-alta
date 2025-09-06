@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PtsModal from "../componentes/modal/ptsModal";
+import PtsTable from "../componentes/tables/ptsTable";
 
 export default function ModalPtsTemplate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function ModalPtsTemplate() {
       </button>
 
       <PtsModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <PtsTable />    
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PtsModal from "../componentes/modal/ptsModal";
-import PtsTable from "../componentes/tables/ptsTable";
+import BtnSearch from "../componentes/buttons/btnSearch";
+import TabelaGenerica from "../componentes/tables/tabelaGenerica";
 
 export default function ModalPtsTemplate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +13,22 @@ export default function ModalPtsTemplate() {
         Cadastro de Projeto Terapêutico Singular
       </h1>
 
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)} 
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Cadastrar PTS
-      </button>
-
       <PtsModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <PtsTable />    
+      
+      <BtnSearch text="Buscar PTS" />
+      <TabelaGenerica
+        title="Projetos Terapêuticos Singulares"
+        description="Lista de PTS cadastrados"
+        buttonText="Adicionar PTS"
+        onButtonClick={() => setIsOpen(true)} B
+        headerColumns={["Nome do Paciente", "Data de Criação", "Status", "Ações"]}
+        rowData={[
+          { Nome: "João", Idade: 30, Sexo: "Masculino" },
+          { Nome: "Maria", Idade: 25, Sexo: "Feminino" },
+        ]}
+        onEdit={(index) => console.log("Editar PTS", index)}
+      />
+
     </>
   );
 }

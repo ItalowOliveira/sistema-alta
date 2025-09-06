@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PtsEspec from "../componentes/modal/especModal"
-import PtsModal from "../componentes/modal/ptaModal"
+import TabelaGenerica from "../componentes/tables/tabelaGenerica";
 
 export default function ModalPtaTemplate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +12,19 @@ export default function ModalPtaTemplate() {
         Cadastro de Plano Terapêutico Altas (PTA)
       </h1>
 
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)} 
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Cadastrar PTA
-      </button>
-
+      <TabelaGenerica
+        title="PTAs"
+        description="Lista de Planos Terapêuticos Altas (PTA) cadastrados"
+        buttonText="Adicionar PTA"
+        onButtonClick={() => setIsOpen(true)}
+        headerColumns={["Paciente", "Idade", "Sexo", "Ações"]}
+        rowData={[
+          { Paciente: "João", Idade: 30, Sexo: "Masculino" },
+          { Paciente: "Maria", Idade: 25, Sexo: "Feminino" },
+        ]}
+        onEdit={(index) => console.log("Editar PTA", index)}
+      />
       <PtsEspec isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <PtsModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 }

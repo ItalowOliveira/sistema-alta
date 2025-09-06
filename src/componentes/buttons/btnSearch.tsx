@@ -1,6 +1,10 @@
 import { UserRoundSearch, Search } from "lucide-react";
 
-export default function btnSearch(){
+type btnProps = {
+    text: string;
+};''
+
+export default function btnSearch({ text }: btnProps){
 
     return(
 
@@ -15,7 +19,7 @@ export default function btnSearch(){
             type="text" 
             id="voice-search" 
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-12 py-2 px-4  dark:bg-neutral-900 dark:border-neutral-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" // Aumentei o padding vertical e o tamanho da fonte
-            placeholder="Insira Nome do Paciente" 
+            placeholder={text}
             required 
         />
     </div>

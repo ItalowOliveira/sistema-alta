@@ -51,62 +51,61 @@ const TabelaGenerica = ({
                 </div>
               </div>
 
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                <thead className="bg-gray-50 dark:bg-neutral-800">
-                  <tr>
-                    <th scope="col" className="ps-6 py-3 text-start">
-                      <label htmlFor="hs-at-with-checkboxes-main" className="flex">
-                        <input type="checkbox" className="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-main" />
-                        <span className="sr-only">Checkbox</span>
-                      </label>
-                    </th>
-
-                    {headerColumns.map((column, index) => (
-                      <th key={index} scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                            {column}
-                          </span>
-                        </div>
+              <div className="w-full overflow-x-auto">
+                <table className="min-w-full w-full table-fixed divide-y divide-gray-200 dark:divide-neutral-700">
+                  <thead className="bg-gray-50 dark:bg-neutral-800">
+                    <tr>
+                      <th scope="col" className="ps-6 py-3 text-center min-w-[40px] w-[40px]">
+                        <label htmlFor="hs-at-with-checkboxes-main" className="flex">
+                          <input type="checkbox" className="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-main" />
+                          <span className="sr-only">Checkbox</span>
+                        </label>
                       </th>
-                    ))}
-
-                    <th scope="col" className="px-6 py-3 text-end"></th>
-                  </tr>
-                </thead>
-
-                <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
-                  {rowData.map((row, index) => (
-                    <tr key={index}>
-                      <td className="size-px whitespace-nowrap">
-                        <div className="ps-6 py-3">
-                          <label htmlFor={`hs-at-with-checkboxes-${index}`} className="flex">
-                            <input type="checkbox" className="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id={`hs-at-with-checkboxes-${index}`} />
-                            <span className="sr-only">Checkbox</span>
-                          </label>
-                        </div>
-                      </td>
-                      {Object.keys(row).map((key, i) => (
-                        <td key={i} className="size-px whitespace-nowrap">
-                          <div className="px-6 py-3">
-                            <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{row[key]}</span>
+                      {headerColumns.map((column, index) => (
+                        <th key={index} scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-center min-w-[120px] w-auto">
+                          <div className="flex items-center gap-x-2">
+                            <span className="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                              {column}
+                            </span>
+                          </div>
+                        </th>
+                      ))}
+                      <th scope="col" className="px-6 py-3 text-center min-w-[80px] w-[80px]"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
+                    {rowData.map((row, index) => (
+                      <tr key={index}>
+                        <td className="size-px whitespace-nowrap text-center w-[40px]">
+                          <div className="ps-6 py-3 flex justify-center">
+                            <label htmlFor={`hs-at-with-checkboxes-${index}`} className="flex">
+                              <input type="checkbox" className="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id={`hs-at-with-checkboxes-${index}`} />
+                              <span className="sr-only">Checkbox</span>
+                            </label>
                           </div>
                         </td>
-                      ))}
-                      <td className="size-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <button
-                            onClick={() => onEdit(index)}
-                            className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
-                          >
-                            Editar
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        {Object.keys(row).map((key, i) => (
+                          <td key={i} className="whitespace-nowrap text-left w-auto">
+                            <div className="px-6 py-3 flex justify-start w-full">
+                              <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200 w-full break-words">{row[key]}</span>
+                            </div>
+                          </td>
+                        ))}
+                        <td className="size-px whitespace-nowrap text-center w-[80px]">
+                          <div className="px-6 py-1.5 flex justify-center">
+                            <button
+                              onClick={() => onEdit(index)}
+                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
+                            >
+                              Editar
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
               <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
                 <div>

@@ -9,7 +9,11 @@ export const createUsuarioRepository = async (data: any) => {
   return result.rows[0];
 };
 
-export const getAllUsuariosRepository = async () => {
+export const getAllUsuariosRepository = async (tipo?: string) => {
+  if (tipo) {
+    const result = await pool.query('SELECT * FROM usuarios WHERE tipo_usuario = $1', [tipo]);
+    return result.rows;
+  }
   const result = await pool.query('SELECT * FROM usuarios');
   return result.rows;
 }

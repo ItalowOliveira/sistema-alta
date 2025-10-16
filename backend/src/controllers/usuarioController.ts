@@ -14,7 +14,8 @@ export const createUsuario = async (req: Request, res: Response) => {
 
 export const getAllUsuarios = async (req: Request, res: Response) => {
   try {
-    const usuarios = await getAllUsuariosService();
+    const tipo = req.query.tipo_usuario as string | undefined;
+    const usuarios = await getAllUsuariosService(tipo);
     res.status(200).json(usuarios);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

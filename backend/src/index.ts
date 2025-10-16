@@ -7,7 +7,9 @@ app.use(express.json());
 app.use(cors());
 
 import usuarioRoutes from './routes/usuarioRoutes';
+import pacientesRoutes from './routes/pacientesRoutes';
 
+app.use('/pacientes', pacientesRoutes);
 app.use('/usuarios', usuarioRoutes);
 
 app.listen(3000, () => {

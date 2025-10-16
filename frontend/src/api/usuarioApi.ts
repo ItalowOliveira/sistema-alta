@@ -10,9 +10,13 @@ export interface Usuario {
     data_criacao: string;
 }
 
-export const getUsuarios = async (): Promise<Usuario[]> => {
-    const response = await api.get<Usuario[]>("/usuarios");
-    return response.data;
+export const getUsuarios = async (tipo_usuario?: string): Promise<Usuario[]> => {
+  let url = "/usuarios";
+  if (tipo_usuario) {
+    url += `?tipo_usuario=${tipo_usuario}`;
+  }
+  const response = await api.get<Usuario[]>(url);
+  return response.data;
 }
 
 export const criarUsuario = async (usuario: Omit<Usuario, 'id'>): Promise<Usuario> => {

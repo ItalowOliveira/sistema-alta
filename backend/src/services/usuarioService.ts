@@ -6,8 +6,8 @@ export const createUsuarioService = async (data: any) => {
   return await createUsuarioRepository(data);
 };
 
-export const getAllUsuariosService = async () => {
-  return await getAllUsuariosRepository();
+export const getAllUsuariosService = async (tipo?: string) => {
+  return await getAllUsuariosRepository(tipo);
 };
 
 export const loginUsuarioService = async (email: string, senha: string) => {

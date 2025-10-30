@@ -8,6 +8,7 @@ import GerenciamentoUser from "./pages/gerenciamentoUser";
 import Impressoes from "./pages/impressoes";
 import Pta from "./pages/pta";
 import Pts from "./pages/pts";
+import Altas from "./pages/altas";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/cadastro-paciente" element={<CadastroPaciente />} />
           <Route path="/gerenciamento-usuarios" element={<GerenciamentoUser />} />
-          <Route path="/impressoes" element={<Impressoes />} />    
+          <Route path="/impressoes" element={<Impressoes />} />   
+          <Route path="/altas" element={<Altas />} /> 
           <Route path="/pta" element={<Pta />} />
           <Route path="/pts" element={<Pts />} />
 

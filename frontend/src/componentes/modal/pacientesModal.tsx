@@ -137,6 +137,15 @@ export default function PacientesModal({ isOpen, onClose }: PacientesModalProps)
                   />
                 </div>
               </div>
+                         <div className="w-full">
+                  <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">ESF</label>
+                  <input
+                    type="text"
+                    placeholder="ESF"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                  />
+                </div>
+
             </div>
             </div>
 

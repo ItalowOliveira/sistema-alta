@@ -82,14 +82,16 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
                             <input type="email" placeholder="email@exemplo.com" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
                                 value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                        <div>
-                            <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Senha</label>
-                            <input type="password" placeholder="Senha" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                                value={senha} onChange={(e) => setSenha(e.target.value)} />
-                        </div>
-                        <div>
-                            <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Confirmar Senha</label>
-                            <input type="password" placeholder="Senha" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                            <div>
+                                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Senha</label>
+                                <input type="password" placeholder="Senha" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                                    value={senha} onChange={(e) => setSenha(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Confirmar Senha</label>
+                                <input type="password" placeholder="Senha" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" />
+                            </div>
                         </div>
                         <div className="md:col-span-2 mb-8">
                             <div>

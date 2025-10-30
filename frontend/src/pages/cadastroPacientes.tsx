@@ -25,7 +25,6 @@ export default function CadastroPacientes() {
   };
 
   const colunasTabela = [
-    { header: "ID", accessorKey: "id" },
     { header: "Nome", accessorKey: "nome" },
     { header: "Idade", accessorKey: "idade" },
     { header: "Portador de", accessorKey: "portador" },

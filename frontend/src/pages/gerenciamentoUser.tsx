@@ -21,7 +21,6 @@ export default function CadastroUsuarios() {
   };
 
   const colunasTabela = [
-    { header: "ID", accessorKey: "id" },
     { header: "Nome", accessorKey: "nome" },
     { header: "E-mail", accessorKey: "email" },
     { header: "Tipo de Usuário", accessorKey: "tipoUsuario" },

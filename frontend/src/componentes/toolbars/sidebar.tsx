@@ -30,25 +30,17 @@ export default function Sidebar() {
           <li>
         <Link to="/cadastro-paciente" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/cadastro-paciente") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
           <Users size={20} color={isActive("/cadastro-paciente") ? "white" : "#999999"} />
-          <span className={`ms-3 text-xs font-bold ${isActive("/cadastro-paciente") ? "text-white" : "text-[#999999]"}`}>Cadastro de Pacientes</span>
+          <span className={`ms-3 text-xs font-bold ${isActive("/cadastro-paciente") ? "text-white" : "text-[#999999]"}`}>Gerenciamento de Pacientes</span>
         </Link>
           </li>
-
 
           <li>
-        <Link to="/pta" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/pta") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
-          <Bandage size={20} color={isActive("/pta") ? "white" : "#999999"} />
-         <span className={`ms-3 text-xs font-bold ${isActive("/pta") ? "text-white" : "text-[#999999]"}`}>PTA</span>
-        </Link>
+            <Link to="/altas" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/altas") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
+              <Stethoscope size={20} color={isActive("/altas") ? "white" : "#999999"} />
+              <span className={`ms-3 text-xs font-bold ${isActive("/altas") ? "text-white" : "text-[#999999]"}`}>Altas</span>
+            </Link>
           </li>
 
-
-        <li>
-        <Link to="/pts" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/pts") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
-          <Stethoscope size={20} color={isActive("/pts") ? "white" : "#999999"} />
-         <span className={`ms-3 text-xs font-bold ${isActive("/pts") ? "text-white" : "text-[#999999]"}`}>PTS</span>
-        </Link>
-          </li>
           
           <li>
         <Link to="/impressoes" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/impressoes") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>

@@ -64,9 +64,64 @@ export default function AltaModal({
             >
               <option value="">Escolha uma opção</option>
               {pacientes.map(p => (
-                <option key={p.id} value={p.id}>{p.nome_paciente}</option>
+              <option key={p.id} value={String(p.id)}>{p.nome_paciente}</option>
               ))}
             </select>
+
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+        
+              <div>
+                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Data de Nascimento</label>
+                <input
+                type="date"
+                readOnly
+                value={pacientes.find(p => String(p.id) === pacienteSelecionado)?.data_nascimento ?? ""}
+                className="w-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg p-2.5"
+                />
+              </div>
+
+              <div>
+                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Telefone</label>
+                <input
+                type="text"
+                readOnly
+                value={pacientes.find(p => String(p.id) === pacienteSelecionado)?.telefone ?? ""}
+                placeholder="Telefone não disponível"
+                className="w-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg p-2.5"
+                />
+              </div>
+                       <div className="md:col-span-2 flex flex-col md:flex-row gap-4">
+                <div className="w-full">
+                  <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Endereço</label>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder="Endereço"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                  />
+                </div>
+                <div className="w-32">
+                  <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Número</label>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder="Nº"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                  />
+                </div>
+                <div className="w-full">
+                  <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Cidade</label>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder="Cidade"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                  />
+                </div>
+              </div>
+              </div>
+        
+
         </div>
           <div className="mb-8">
             <div className="flex items-center gap-3 border-b dark:border-gray-700 pb-2 mb-4">

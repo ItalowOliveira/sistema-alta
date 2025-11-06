@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 type TableRow = { [key: string]: string | number | boolean };
@@ -16,6 +16,8 @@ type TableProps = {
   columns: ColumnDefinition[];
   fetchData: () => Promise<TableRow[]>;
   onEdit?: (index: number, row: TableRow) => void;
+  // optional custom renderer for action buttons (returns React nodes).
+  renderActions?: (index: number, row: TableRow) => React.ReactNode;
 };
 
 const TabelaGenerica = ({
@@ -26,6 +28,7 @@ const TabelaGenerica = ({
   columns,
   fetchData,
   onEdit,
+  renderActions,
 }: TableProps) => {
   const [rowData, setRowData] = useState<TableRow[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -122,7 +125,7 @@ const TabelaGenerica = ({
                             </span>
                           </th>
                         ))}
-                        <th className="px-6 py-3 text-center w-24">Ações</th> {/* Largura fixa para ações */}
+                        <th className="text-xs font-semibold uppercase tracking-wider text-gray-800 dark:text-neutral-200">Ações</th> {/* Largura fixa para ações */}
                       </tr>
                     </thead>
 
@@ -144,14 +147,16 @@ const TabelaGenerica = ({
                             </td>
                           ))}
                           <td className="text-center px-6 py-4">
-                            {onEdit && (
+                            {renderActions ? (
+                              renderActions(index, row)
+                            ) : onEdit ? (
                               <button
                                 onClick={() => onEdit(index, row)}
                                 className="text-blue-600 hover:underline dark:text-blue-400"
                               >
                                 Editar
                               </button>
-                            )}
+                            ) : null}
                           </td>
                         </tr>
                       ))}

@@ -1,12 +1,16 @@
 // Importações permanecem as mesmas
-import { useState, memo } from "react";
+import { useState, useEffect, memo } from "react";
 import { User, CalendarClock, Stethoscope, HeartPulse, ClipboardList, Clock, Activity } from "lucide-react";
 import ModalTemplate from "./modalTemplate";
+import { getPacientes } from "../../api/pacientesApi";
+import { getUsuarios } from "../../api/usuarioApi";
 
 type PtsModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+// ...useEffects moved inside component
 
 // --- PASSO 1: Extrair a seção de Fisioterapia para um componente separado ---
 // Usamos `memo` para evitar re-renderizações desnecessárias deste componente.
@@ -64,16 +68,36 @@ const AvaliacaoFisioterapeutica = memo(function AvaliacaoFisioterapeutica() {
 
 export default function ModalPtsTemplate({ isOpen, onClose }: PtsModalProps) {
   const [professional, setProfessional] = useState('');
+  const [pacientes, setPacientes] = useState<{ id: number; nome_paciente: string }[]>([]);
+  const [pacienteSelecionado, setPacienteSelecionado] = useState("");
+  const [medicos, setMedicos] = useState<{ id: number; nome: string }[]>([]);
+
+  useEffect(() => {
+    if (isOpen) {
+      getPacientes()
+        .then((res) => {
+          setPacientes(res.map((p) => ({ id: p.id, nome_paciente: p.nome_paciente })));
+        })
+        .catch((err) => console.error('Erro fetch pacientes:', err));
+
+      // Buscar usuários (ex.: médicos) — mesma lógica do AltaModal
+      getUsuarios("Admin")
+        .then((usuarios) => {
+          setMedicos(usuarios.map((u) => ({ id: u.id, nome: u.nome })));
+        })
+        .catch((err) => console.error('Erro fetch usuarios:', err));
+    }
+  }, [isOpen]);
 
   return (
     <ModalTemplate
       isOpen={isOpen}
       onClose={onClose}
+      onClick={() => { console.log('Salvar PTS - TODO'); onClose(); }}
       TituloModal="Projeto Terapêutico Singular"
       BtnText="Salvar PTS"
       Conteudo={
         <>
-          {/* Seção Dados do Paciente (sem alterações) */}
           <div className="mb-8">
             <div className="flex items-center gap-3 border-b dark:border-gray-700 pb-2 mb-4">
               <User className="text-blue-500" />
@@ -82,16 +106,17 @@ export default function ModalPtsTemplate({ isOpen, onClose }: PtsModalProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
               <div className="md:col-span-2">
                 <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Paciente</label>
-                <select
-                  className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                >
-                  <option value="" disabled selected>
-                    Nome completo do paciente
-                  </option>
-                  <option value="joao">João da Silva</option>
-                  <option value="maria">Maria Oliveira</option>
-                  <option value="carlos">Carlos Souza</option>
-                </select>
+                  <select
+                    id="small"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                    value={pacienteSelecionado}
+                    onChange={e => setPacienteSelecionado(e.target.value)}
+                  >
+                    <option value="">Escolha uma opção</option>
+                    {pacientes.map(p => (
+                      <option key={p.id} value={p.id}>{p.nome_paciente}</option>
+                    ))}
+                  </select>
               </div>
             </div>
           </div>

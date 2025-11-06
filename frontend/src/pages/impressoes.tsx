@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
-import { getUsuarios, type Usuario } from "../api/usuarioApi";
+import { Printer } from "lucide-react";
 
 export default function Painel() {
-  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-
-  useEffect(() => {
-    getUsuarios().then(setUsuarios);
-  }, []);
-
   return (
-    <>
-      <h1>Painel de Impressões</h1>
-      <ul>
-        {usuarios.map(usuario => (
-          <li key={usuario.id}>{usuario.nome} - {usuario.email}</li>
-        ))}
-      </ul>
-    </>
+    <div>
+      <div className="flex items-start mb-4 gap-3">
+        <div className="rounded-full bg-blue-100 p-2">
+          <Printer className="mr-0 h-10 w-10 text-blue-500" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Impressão de Relatorios
+          </h1>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Gerenciamento de Relatorios
+          </span>
+        </div>
+      </div>
+    </div>
+
   );
 }

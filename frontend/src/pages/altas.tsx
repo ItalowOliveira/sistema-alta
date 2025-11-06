@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import AltaModal from "../componentes/modal/altaModal";
 import TabelaGenerica from "../componentes/tables/tabelaGenerica";
+import PtsModal from "../componentes/modal/ptsModal";
+import EspecModal from "../componentes/modal/especModal";
 import BtnSearch from "../componentes/buttons/btnSearch";
 import { Stethoscope } from "lucide-react";
 import { getAllAltas } from "../api/altasApi";
@@ -8,6 +10,8 @@ import { getAllAltas } from "../api/altasApi";
 export default function ModalPtaTemplate() {
   const [isOpen, setIsOpen] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
+  const [isPtsOpen, setIsPtsOpen] = useState(false);
+  const [isEspecOpen, setIsEspecOpen] = useState(false);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -35,7 +39,6 @@ export default function ModalPtaTemplate() {
   ];
 
   const handleAfterCreate = useCallback(() => {
-    // trigger reload in TabelaGenerica by changing key
     setReloadKey(k => k + 1);
   }, []);
 
@@ -61,8 +64,32 @@ export default function ModalPtaTemplate() {
         onButtonClick={handleOpen}
         columns={colunas}
         fetchData={fetchAltas}
-        onEdit={(index, row) => alert(`Editar alta: ${row.paciente}`)}
+        renderActions={(index, row) => (
+          <div className="inline-flex gap-2">
+            <button
+              onClick={() => alert(`Editar alta: ${row.paciente}`)}
+              className="text-xs px-1 py-1 rounded-lg border border-transparent bg-[#232c46] text-[#0099ff] hover:bg-[#1f263b] focus:outline-hidden focus:bg-[#1f263b] disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Editar
+            </button>
+            <button
+              onClick={() => setIsPtsOpen(true)}
+              className="text-xs px-1 py-1 rounded-lg border border-transparent bg-[#004d40] text-[#00ffc8] hover:bg-[#1f263b] focus:outline-hidden focus:bg-[#1f263b] disabled:opacity-50 disabled:pointer-events-none"
+            >
+              PTS
+            </button>
+            <button
+              onClick={() => setIsEspecOpen(true)}
+              className="text-xs px-1 py-1 rounded-lg border border-transparent bg-[#880e4f] text-[#ff80ab] hover:bg-[#1f263b] focus:outline-hidden focus:bg-[#1f263b] disabled:opacity-50 disabled:pointer-events-none"
+            >
+              PTA
+            </button>
+          </div>
+        )}
       />
+  {/* Modais PTS / Especiais */}
+  <PtsModal isOpen={isPtsOpen} onClose={() => setIsPtsOpen(false)} />
+  <EspecModal isOpen={isEspecOpen} onClose={() => setIsEspecOpen(false)} />
     
       <AltaModal
         isOpen={isOpen}

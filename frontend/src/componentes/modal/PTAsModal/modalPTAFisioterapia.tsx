@@ -13,6 +13,7 @@ export default function ModalPTAFisioterapia({ isOpen, onClose }: ModalPTAFisiot
     <ModalTemplate
       isOpen={isOpen}
       onClose={onClose}
+      onClick={() => {}}
       TituloModal="Cadastro de Paciente"
       BtnText="Salvar Paciente"
       Conteudo={

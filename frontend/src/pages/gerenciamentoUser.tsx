@@ -51,7 +51,16 @@ export default function CadastroUsuarios() {
         onButtonClick={handleOpenModal}
         columns={colunasTabela}
         fetchData={fetchUsuarios}
-        onEdit={(index, row) => alert(`Editar usuário: ${row.nome}`)}
+         renderActions={(index, row) => (
+                   <div className="inline-flex gap-2">
+            <button
+              onClick={() => alert(`Editar alta: ${row.paciente}`)}
+              className="text-xs px-1 py-1 rounded-lg border border-transparent bg-[#232c46] text-[#0099ff] hover:bg-[#1f263b] focus:outline-hidden focus:bg-[#1f263b] disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Editar
+            </button>
+          </div>
+        )}
       />
 
       <UsuariosModal isOpen={isModalOpen} onClose={handleCloseModal} />

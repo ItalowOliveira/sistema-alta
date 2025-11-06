@@ -1,13 +1,21 @@
-import { UserPlus, CalendarPlus, NotepadText, ClipboardPlus} from "lucide-react";
+import { UserPlus, CalendarPlus, NotepadText, ClipboardPlus, Stethoscope} from "lucide-react";
 import { useState } from "react";
 import BtnAcoes from "../buttons/btnAcoes";
 import BtnList from "../buttons/btnLista";
+import PacientesModal from "../modal/pacientesModal";
+import AltaModal from "../modal/altaModal";
 
 export default function cardPanel() {
-  const [] = useState(false);
+  const [isPacientesModalOpen, setIsPacientesModalOpen] = useState(false);
+  const [isAltaModalOpen, setIsAltaModalOpen] = useState(false);
+
+  const openPacientesModal = () => setIsPacientesModalOpen(true);
+  const closePacientesModal = () => setIsPacientesModalOpen(false);
+
+  const openAltaModal = () => setIsAltaModalOpen(true);
+  const closeAltaModal = () => setIsAltaModalOpen(false);
+
   return (
-
-
     
      <div className="mt-6 flex gap-x-4 justify-center">
 
@@ -37,17 +45,20 @@ export default function cardPanel() {
         <div className="p-7 md:p-12 w-full">
           <div className="grid grid-cols-2 gap-4 w-full">
 
-            <BtnAcoes  texto="Novo Paciente" icone={<UserPlus size={20} color="#0099ff" />} fundoBG="bg-blue-50"/>
-            <BtnAcoes texto="Impressões" icone={<CalendarPlus size={20} color="#0099ff" />} fundoBG="bg-green-50"/>
+            <BtnAcoes texto="Novo Paciente" icone={<UserPlus size={20} color="#0099ff" />} fundoBG="bg-blue-50" onClick={openPacientesModal} />
+            <BtnAcoes texto="Nova Alta" icone={<Stethoscope size={20} color="#0099ff" />} fundoBG="bg-green-50" onClick={openAltaModal} />
             <BtnAcoes texto="Novo PTS" icone={<NotepadText size={20} color="#0099ff" />} fundoBG="bg-yellow-50"/>
             <BtnAcoes texto="Novo PTA" icone={<ClipboardPlus size={20} color="#0099ff" />} fundoBG="bg-purple-50"/>
 
+            <PacientesModal isOpen={isPacientesModalOpen} onClose={closePacientesModal} />
+            <AltaModal isOpen={isAltaModalOpen} onClose={closeAltaModal} onClick={() => { /* placeholder save handler */ closeAltaModal(); }} TituloModal="Cadastro de Altas" BtnText="Salvar" />
           </div>
         </div>
       </div>
     </div>
 
 
+    
 
   );
 }

@@ -9,10 +9,11 @@ type ModalPTAEnfermagemProps = {
 
 export default function ModalPTAEnfermagem({ isOpen, onClose }: ModalPTAEnfermagemProps) {
   if (!isOpen) return null;
-  return (
+    return (
     <ModalTemplate
       isOpen={isOpen}
       onClose={onClose}
+      onClick={() => {}}
       TituloModal="Cadastro de Plano Terapêutico de Alta"
       BtnText="Salvar PTA"
       Conteudo={

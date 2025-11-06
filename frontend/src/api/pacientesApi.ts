@@ -1,6 +1,8 @@
 import api from "./apiClient";
 
 export interface Pacientes {
+    data_nascimento: any;
+    cpf: any;
     
     id: number;
     nome_paciente: string;

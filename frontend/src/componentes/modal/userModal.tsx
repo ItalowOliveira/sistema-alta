@@ -1,7 +1,7 @@
 import ModalTemplate from "./modalTemplate";
 import ModalPopUp from "./modalPopUp";
 import { criarUsuario } from "../../api/usuarioApi";
-import { HeartPulse, Lock, Eye, EyeOff, User } from "lucide-react";
+import { HeartPulse, Lock, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
 type UserModalProps = {
@@ -69,7 +69,6 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
     const [confirmSenha, setConfirmSenha] = useState('');
     const [showConfirm, setShowConfirm] = useState(false);
     const [tipo_usuario, setTipo_usuario] = useState('');
-    const [setor, setSetor] = useState('');
     const [showSavedModal, setShowSavedModal] = useState(false);
 
     const handleSubmit = async () => {
@@ -79,7 +78,6 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
                 email,
                 senha,
                 tipo_usuario,
-                setor,
                 data_criacao: new Date().toISOString()
             };
             await criarUsuario(novoUsuario);
@@ -97,15 +95,17 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
         setSenha('');
         setConfirmSenha('');
         setTipo_usuario('');
-        setSetor('');
     }
 
+
+    const isFormValid = String(nome).trim().length > 0 && String(email).trim().length > 0 && String(senha).trim().length > 0 && String(confirmSenha).trim().length > 0 && senha === confirmSenha && String(tipo_usuario).trim().length > 0;
 
     return (
         <>
         <ModalTemplate
             isOpen={isOpen}
             onClick={handleSubmit}
+            isDisabled={!isFormValid}
             onClose={onClose}
             TituloModal="Cadastro de Usuário"
             BtnText="Cadastrar"
@@ -117,12 +117,6 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
                         <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Dados do Médico</h3>
                     </div>
 
-                    <div className="flex justify-center mb-4">
-                        <div className="relative w-40 h-40 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 flex items-center justify-center">
-                            <User className="w-20 h-20 text-gray-300 dark:text-gray-500" />
-                        </div>
-                        </div>
-                   
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                         <div>
                             <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Nome</label>
@@ -130,18 +124,22 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
                                 value={nome} onChange={(e) => setNome(e.target.value)} />
                         </div>
                         <div>
-                            <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Setor</label>
+                            <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Tipo Usuario</label>
                             <select id="small" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                                value={setor} onChange={(e) => setSetor(e.target.value)}>
-                                <option >Escolha uma opção</option>
-                                <option value="Psicologia">Psicologia</option>
-                                <option value="Fisioterapia">Fisioterapia</option>
-                                <option value="Enfermagem">Enfermagem</option>
-                                <option value="Nutrição">Nutrição</option>
-                                <option value="Assistente Social">Assistente Social</option>
-                            </select>
-                        </div>
+                              value={tipo_usuario} onChange={(e) => setTipo_usuario(e.target.value)}>
+                                    <option >Escolha uma opção</option>
+                                    <option value="Enfermagem">Enfermagem</option>
+                                    <option value="Médico">Médico</option>
+                                    <option value="Fisioterapia">Fisioterapia</option>
+                                    <option value="Nutrição">Nutrição</option>
+                                    <option value="Psicologia">Psicologia</option>
+                                    <option value="Assistente Social">Assistente Social</option>
+                                </select>
+                            </div>
                     </div>
+
+                    {/* Setor (was missing from the form but required by validation) */}
+                        {/* setor removed: managed at paciente level */}
 
                     {/* Dados de Acesso */}
                     <div className="flex items-center gap-3 border-b dark:border-gray-700 pb-2 mb-4 mt-10">
@@ -171,23 +169,6 @@ export default function UsuariosModal({ isOpen, onClose }: UserModalProps) {
                                 {confirmSenha && confirmSenha !== senha && (
                                     <p className="mt-1 text-sm text-red-500">As senhas não coincidem.</p>
                                 )}
-                            </div>
-                        </div>
-
-                        <div className="mb-8">
-                            <div>
-                                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Perfil de acesso</label>
-                                <select id="small" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                                    value={tipo_usuario} onChange={(e) => setTipo_usuario(e.target.value)}>
-                                    <option >Escolha uma opção</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Usuário">Usuário Enfermagem</option>
-                                    <option value="Usuário">Usuário Médico</option>
-                                    <option value="Usuário">Usuário Fisioterapia</option>
-                                    <option value="Usuário">Usuário Nutrição</option>
-                                    <option value="Usuário">Usuário Psicologia</option>
-                                    <option value="Usuário">Usuário Assistente Social</option>
-                                </select>
                             </div>
                         </div>
                     </div>

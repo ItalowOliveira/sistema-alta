@@ -1,10 +1,10 @@
 import { pool } from '../db'; 
 
 export const createPacienteRepository = async (data: any) => {
-    const { nome_paciente, idade, portador_de, endereco, numero, cidade, setor, leito, data_internacao, data_alta, medico_responsavel } = data;
+    const { nome_paciente, data_nascimento, portador_de, endereco, numero, cidade, setor, leito, esf, hd } = data;
     const result = await pool.query(
-        'INSERT INTO pacientes (nome_paciente, idade, portador_de, endereco, numero, cidade, setor, leito, data_internacao, data_alta, medico_responsavel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
-        [nome_paciente, idade, portador_de, endereco, numero, cidade, setor, leito, data_internacao, data_alta, medico_responsavel]
+        'INSERT INTO pacientes (nome_paciente, data_nascimento, portador_de, endereco, numero, cidade, setor, leito, esf, hd) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+        [nome_paciente, data_nascimento, portador_de, endereco, numero, cidade, setor, leito, esf, hd]
     );
     return result.rows[0];
 };

@@ -14,6 +14,9 @@ function Login() {
         e.preventDefault();
         const usuario = await loginUsuario(email, senha);
         if (usuario) {
+            // store basic session in memory (simple)
+            (window as any).currentUser = usuario;
+            console.log('Usuário logado tipo:', (usuario as any).tipo_usuario);
             Alterarpagina('/dashboard');
         } else {
             setErro('E-mail ou senha inválidos');

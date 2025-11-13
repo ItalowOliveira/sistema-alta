@@ -18,10 +18,7 @@ export const getAllUsuariosRepository = async (tipo?: string) => {
   return result.rows;
 }
 
-export const loginUsuarioRepository = async (email: string, senha: string) => {
-  const result = await pool.query(
-    'SELECT * FROM usuarios WHERE email = $1 AND senha = $2',
-    [email, senha]
-  );
+export const getUsuarioByEmailRepository = async (email: string) => {
+  const result = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);
   return result.rows[0];
 };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import ModalPTANutricao from "./PTAsModal/modalPTANutricao";
 import ModalPTAEnfermagem from "./PTAsModal/modalPTAEnfermagem";
 import ModalPTAServicoSocial from "./PTAsModal/modalPTAServicoSocial";
-import ModalPTAPsicologia from "./PTAsModal/modalPTAPsicologio";
+import ModalPTAPsicologia from "./PTAsModal/modalPTAPsicologo";
 import ModalPTAFisioterapia from "./PTAsModal/modalPTAFisioterapia";
 
 type EspecModalProps = {
@@ -110,7 +110,7 @@ export default function EspecTemplate({ isOpen, onClose }: EspecModalProps) {
                 </div>
                 {/* Modal de Enfermagem */}
                 {isEnfermagemModalOpen && (
-                    <ModalPTAEnfermagem isOpen={isEnfermagemModalOpen} onClose={() => setIsEnfermagemModalOpen(false)} />
+                    <ModalPTAEnfermagem isOpen={isEnfermagemModalOpen} onClose={() => setIsEnfermagemModalOpen(false)} isEditable={true} />
                 )}
 
                 {/* Modal de Nutrição */}
@@ -130,7 +130,7 @@ export default function EspecTemplate({ isOpen, onClose }: EspecModalProps) {
 
                 {/* Modal de Fisioterapia */}
                 {isFisioterapiaModalOpen && (
-                    <ModalPTAFisioterapia isOpen={isFisioterapiaModalOpen} onClose={() => setIsFisioterapiaModalOpen(false)} />
+                    <ModalPTAFisioterapia isOpen={isFisioterapiaModalOpen} onClose={() => setIsFisioterapiaModalOpen(false)} isEditable={true} />
                 )}  
             </>
         );

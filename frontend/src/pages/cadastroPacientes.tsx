@@ -15,23 +15,21 @@ export default function CadastroPacientes() {
     return pacientes.map(p => ({
       id: p.id,
       nome: p.nome_paciente,
-      idade: p.idade,
-      portador: p.portador_de,
-      setor: p.setor,
-      leito: p.leito,
-      cidade: p.cidade,
-      medico: p.medico_responsavel,
+      data_nascimento: p.data_nascimento ?? '',
+      portador: p.portador_de ?? '',
+      setor: p.setor ?? '',
+      leito: p.leito ?? '',
+      cidade: p.cidade ?? '',
     }));
   };
 
   const colunasTabela = [
     { header: "Nome", accessorKey: "nome" },
-    { header: "Idade", accessorKey: "idade" },
+  { header: "Data Nasc.", accessorKey: "data_nascimento" },
     { header: "Portador de", accessorKey: "portador" },
     { header: "Setor", accessorKey: "setor" },
     { header: "Leito", accessorKey: "leito" },
     { header: "Cidade", accessorKey: "cidade" },
-    { header: "Médico", accessorKey: "medico" },
   ];
 
   return (
@@ -58,8 +56,9 @@ export default function CadastroPacientes() {
         buttonText="Adicionar Paciente"
         onButtonClick={handleOpenModal}
         columns={colunasTabela}
-        fetchData={fetchPacientes}
-         renderActions={(index, row) => (
+          fetchData={fetchPacientes}
+          pageSize={10}
+         renderActions={(_index, row) => (
                    <div className="inline-flex gap-2">
             <button
               onClick={() => alert(`Editar alta: ${row.paciente}`)}

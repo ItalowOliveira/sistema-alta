@@ -51,7 +51,8 @@ export default function CadastroUsuarios() {
         onButtonClick={handleOpenModal}
         columns={colunasTabela}
         fetchData={fetchUsuarios}
-         renderActions={(index, row) => (
+    pageSize={10}
+    renderActions={(_, row) => (
                    <div className="inline-flex gap-2">
             <button
               onClick={() => alert(`Editar alta: ${row.paciente}`)}

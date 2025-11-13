@@ -1,9 +1,23 @@
 import { Link, useLocation} from "react-router-dom";
-import {Users, ChartPie, Bandage, Stethoscope, Printer, ShieldUser, Sun} from "lucide-react";
+import {Users, ChartPie, Stethoscope, Printer, ShieldUser, Sun} from "lucide-react";
+import React from 'react';
+import { meUsuario } from '../../api/usuarioApi';
 
 
 export default function Sidebar() {
   const location = useLocation();
+  const [canManageUsers, setCanManageUsers] = React.useState(false);
+
+  React.useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const u = await meUsuario();
+      if (!mounted) return;
+      const role = (u as any)?.tipo_usuario;
+      if (role === 'Admin' || role === 'Médico') setCanManageUsers(true);
+    })();
+    return () => { mounted = false };
+  }, []);
 
   const isActive = (path: string) => {
    return location.pathname === path;
@@ -49,12 +63,14 @@ export default function Sidebar() {
         </Link>
           </li>
 
-        <li>
-        <Link to="/gerenciamento-usuarios" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/gerenciamento-usuarios") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
-          <ShieldUser size={20} color={isActive("/gerenciamento-usuarios") ? "white" : "#999999"} />
-          <span className={`ms-3 text-xs font-bold ${isActive("/gerenciamento-usuarios") ? "text-white" : "text-[#999999]"}`}>Gerenciamento de Usuários</span>
-        </Link>
+        {canManageUsers && (
+          <li>
+            <Link to="/gerenciamento-usuarios" className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${isActive("/gerenciamento-usuarios") ? "bg-blue-600 dark:bg-blue-600" : ""}`}>
+              <ShieldUser size={20} color={isActive("/gerenciamento-usuarios") ? "white" : "#999999"} />
+              <span className={`ms-3 text-xs font-bold ${isActive("/gerenciamento-usuarios") ? "text-white" : "text-[#999999]"}`}>Gerenciamento de Usuários</span>
+            </Link>
           </li>
+        )}
 
            <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700"></ul>
 

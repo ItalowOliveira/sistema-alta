@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalTemplate from "./modalTemplate";
-import { getUsuarios } from "../../api/usuarioApi";
+import ModalPopUp from "./modalPopUp";
 import { criarPaciente } from "../../api/pacientesApi";
-import { User, CalendarClock, Stethoscope } from "lucide-react";
+import { User } from "lucide-react";
 
 type PacientesModalProps = {
   isOpen: boolean;
@@ -10,57 +10,59 @@ type PacientesModalProps = {
 };
 
 export default function PacientesModal({ isOpen, onClose }: PacientesModalProps) {
-  const [medicos, setMedicos] = useState<{ id: number; nome: string }[]>([]);
   const [doenca, setDoenca] = useState("");
   const [motivoOutro, setMotivoOutro] = useState("");
   const [endereco, setEndereco] = useState("");
   const [numero, setNumero] = useState("");
   const [cidade, setCidade] = useState("");
   const [nomePaciente, setNomePaciente] = useState("");
-  const [idade, setIdade] = useState("");
-  const [setor, setSetor] = useState("");
-  const [leito, setLeito] = useState("");
-  const [dataInternacao, setDataInternacao] = useState("");
-  const [dataAlta, setDataAlta] = useState("");
-  const [medicoResponsavel, setMedicoResponsavel] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [esf, setEsf] = useState("");
+  const [hd, setHd] = useState("");
+  const [showSavedModal, setShowSavedModal] = useState(false);
 
-  useEffect(() => {
-    if (isOpen) {
-      getUsuarios("Admin").then(usuarios => {
-        setMedicos(usuarios.map(u => ({ id: u.id, nome: u.nome })));
-      });
-    }
-  }, [isOpen]);
+  const resetForm = () => {
+    setDoenca("");
+    setMotivoOutro("");
+    setEndereco("");
+    setNumero("");
+    setCidade("");
+    setNomePaciente("");
+    setDataNascimento("");
+    setEsf("");
+    setHd("");
+  }
+
 
   const handleSubmit = async () => {
     try {
       const paciente = {
         nome_paciente: nomePaciente,
-        idade: Number(idade),
+        data_nascimento: dataNascimento || null,
         portador_de: doenca,
         motivo: doenca === "Outro" ? motivoOutro : "",
-        endereco,
-        numero: Number(numero),
-        cidade,
-        setor,
-        leito,
-        data_internacao: dataInternacao,
-        data_alta: dataAlta,
-        medico_responsavel: medicoResponsavel,
+  endereco,
+  numero: Number(numero),
+  cidade,
+  esf,
+  hd,
       };
-      await criarPaciente(paciente);
-      alert("Paciente cadastrado com sucesso!");
-      onClose();
+  await criarPaciente(paciente);
+  setShowSavedModal(true);
     } catch (error) {
       console.error("Erro ao cadastrar paciente:", error);
       alert("Erro ao cadastrar paciente.");
     }
   };
+  const isFormValid = String(nomePaciente).trim().length > 0 && String(doenca).trim().length > 0;
+
   return (
+    <>
     <ModalTemplate
       isOpen={isOpen}
       onClose={onClose}
       onClick={handleSubmit}
+      isDisabled={!isFormValid}
       TituloModal="Cadastro de Paciente"
       BtnText="Salvar Paciente"
       Conteudo={
@@ -77,8 +79,8 @@ export default function PacientesModal({ isOpen, onClose }: PacientesModalProps)
                 <input type="text" placeholder="Nome completo do paciente" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={nomePaciente} onChange={e => setNomePaciente(e.target.value)} />
               </div>
               <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Idade</label>
-                <input type="number" placeholder="Idade" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={idade} onChange={e => setIdade(e.target.value)} />
+                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Data de Nascimento</label>
+                <input type="date" placeholder="Data de nascimento" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={dataNascimento} onChange={e => setDataNascimento(e.target.value)} />
               </div>
               <div className="md:col-span-2">
                 <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Paciente Portador de:</label>
@@ -137,67 +139,45 @@ export default function PacientesModal({ isOpen, onClose }: PacientesModalProps)
                   />
                 </div>
               </div>
-                         <div className="w-full">
+                <div className="w-full">
                   <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">ESF</label>
                   <input
                     type="text"
                     placeholder="ESF"
                     className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                    value={esf}
+                    onChange={e => setEsf(e.target.value)}
+                  />
+                </div>
+                <div className="w-full">
+                  <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">HD</label>
+                  <input
+                    type="text"
+                    placeholder="HD"
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                    value={hd}
+                    onChange={e => setHd(e.target.value)}
                   />
                 </div>
 
             </div>
             </div>
-
-          {/* Seção Internação */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 border-b dark:border-gray-700 pb-2 mb-4">
-              <CalendarClock className="text-blue-500" />
-              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Internação</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-              <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Setor</label>
-                <input type="text" placeholder="Setor" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={setor} onChange={e => setSetor(e.target.value)} />
-              </div>
-              <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Leito</label>
-                <input type="text" placeholder="Leito" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={leito} onChange={e => setLeito(e.target.value)} />
-              </div>
-              <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Data da internação</label>
-                <input type="date" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={dataInternacao} onChange={e => setDataInternacao(e.target.value)} />
-              </div>
-              <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Data da Alta</label>
-                <input type="date" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={dataAlta} onChange={e => setDataAlta(e.target.value)} />
-              </div>
-            </div>
-          </div>
-
-          {/* Seção Médico Responsável */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 border-b dark:border-gray-700 pb-2 mb-4">
-              <Stethoscope className="text-blue-500" />
-              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Médico Responsável</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-            
-              <div>
-                <label className="block mb-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">Médico</label>
-                <select className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" value={medicoResponsavel} onChange={e => setMedicoResponsavel(e.target.value)}>
-                  <option value="">Escolha o Médico</option>
-                  {medicos.map(medico => (
-                    <option key={medico.id} value={medico.nome}>{medico.nome}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
         </div>
 
         }
 
     />
+    <ModalPopUp
+      isOpen={showSavedModal}
+      onClose={() => setShowSavedModal(false)}
+      onClick={() => {
+        resetForm();
+        setShowSavedModal(false);
+        onClose();
+      }}
+      title="Paciente cadastrado!"
+      message="O paciente foi criado com sucesso!"
+    />
+    </>
   );
 }

@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { createAlta } from "../controllers/altasController";
-import { getAllAlta } from "../controllers/altasController";
+import { createAlta, getAllAlta, finalizeAlta } from "../controllers/altasController";
+import { requireAuth } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.post("/", createAlta);
-router.get("/", getAllAlta);
+router.post("/", requireAuth, createAlta);
+router.get("/", requireAuth, getAllAlta);
+router.post("/:id/finalizar", requireAuth, finalizeAlta);
 
 export default router;
 

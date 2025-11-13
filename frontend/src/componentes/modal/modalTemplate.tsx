@@ -2,6 +2,8 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onClick: () => void;
+  isSubmitting?: boolean;
+  isDisabled?: boolean;
   TituloModal: string;
   BtnText: string;
   Conteudo: React.ReactNode;
@@ -11,6 +13,8 @@ export default function ModalTemplate({
   isOpen,
   onClose,
   onClick,
+  isSubmitting,
+  isDisabled = false,
   TituloModal,
   BtnText,
   Conteudo
@@ -54,9 +58,10 @@ export default function ModalTemplate({
           </button>
           <button
             onClick={onClick}
-            className="px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-600"
+            disabled={!!isSubmitting || !!isDisabled}
+            className={`px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-600 ${isSubmitting || isDisabled ? 'opacity-60 pointer-events-none' : ''}`}
           >
-            {BtnText}
+            {isSubmitting ? 'Enviando...' : BtnText}
           </button>
         </div>
       </div>

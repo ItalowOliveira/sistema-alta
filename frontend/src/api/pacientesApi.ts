@@ -1,22 +1,19 @@
 import api from "./apiClient";
 
 export interface Pacientes {
-    data_nascimento: any;
-    cpf: any;
-    
     id: number;
     nome_paciente: string;
-    idade: number;
-    portador_de: string;
-    motivo: string;
-    endereco: string;
-    numero: number;
-    cidade: string;
-    setor: string;
-    leito: string;
-    data_internacao: string;
-    data_alta: string;
-    medico_responsavel: string;
+    data_nascimento?: string | null;
+    portador_de?: string;
+    motivo?: string;
+    endereco?: string;
+    numero?: number;
+    cidade?: string;
+    setor?: string;
+    leito?: string;
+    esf?: string;
+    hd?: string;
+    
 }
 
 export const getPacientes = async (): Promise<Pacientes[]> => {

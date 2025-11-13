@@ -1,7 +1,6 @@
 import api from "./apiClient";
 
 export interface Usuario {
-
     id: number;
     nome: string;
     email: string;
@@ -30,5 +29,23 @@ export const loginUsuario = async (email: string, senha: string): Promise<Usuari
     return response.data;
   } catch {
     return null;
+  }
+};
+
+export const meUsuario = async (): Promise<Usuario | null> => {
+  try {
+    const response = await api.get<Usuario>("/usuarios/me");
+    return response.data;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const logout = async (): Promise<boolean> => {
+  try {
+    await api.post('/usuarios/logout');
+    return true;
+  } catch {
+    return false;
   }
 };
